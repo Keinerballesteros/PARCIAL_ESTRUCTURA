@@ -1,8 +1,22 @@
 
-package com.mycompany.proyecto.ejerciciouno.ejerciciodos;
+package com.mycompany.proyecto.ejerciciodos;
 
 
 public class Nodo {
+
+    /**
+     * @return the numeroDeBoletas
+     */
+    public int getNumeroDeBoletas() {
+        return numeroDeBoletas;
+    }
+
+    /**
+     * @param numeroDeBoletas the numeroDeBoletas to set
+     */
+    public void setNumeroDeBoletas(int numeroDeBoletas) {
+        this.numeroDeBoletas = numeroDeBoletas;
+    }
 
     /**
      * @return the id
@@ -93,5 +107,13 @@ public class Nodo {
      private String fecha;
      private String pelicula;
      private char sexo;
+     private int numeroDeBoletas;
      private Nodo enlace;
+
+    @Override
+    public String toString() {
+        return "Cliente: " + "id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", pelicula=" + pelicula + ", sexo=" + sexo + ", numeroDeBoletas=" + numeroDeBoletas ;
+    }
+     
+     
 }
