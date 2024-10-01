@@ -18,6 +18,18 @@ public class EscenariosBienestar {
         }
     }
     
+    public void llenar(){
+        int array[] = {23,78,34,23,45,23,67,45,67,45,46,34,89,23,88,66,55,56,54,26,48,19,21,78};
+        int contador = 0;
+        for (int i = 0; i < escenarios.length; i++) {
+            for (int j = 0; j < dias.length; j++) {
+               
+               datos[i][j] = array[contador];
+               contador++;
+            }
+        }
+    }
+    
     public void escenarioMasVisitado(){
         int totalVisitantes[] = new int [escenarios.length];
         for (int i = 0; i < escenarios.length; i++) {
@@ -32,7 +44,6 @@ public class EscenariosBienestar {
                 pivote = totalVisitantes[i];
                 contador = i;
             }
-            
         }
         JOptionPane.showMessageDialog(null, "El escenario mas visitado es "+escenarios[contador] +" con "+totalVisitantes[contador]+ " visitantes");
     }
@@ -46,9 +57,9 @@ public class EscenariosBienestar {
            
         }
         int totalVisitantes = 0;
-        int pivoteMayor =  datos[posicion][0];
         int diaMayor = 0;
         int diaMenor = 0;
+        int pivoteMayor =  datos[posicion][0];
         int pivoteMenor =  datos[posicion][0];
         
             for (int j = 0; j < dias.length; j++) {
@@ -81,7 +92,7 @@ public class EscenariosBienestar {
             }
             
         }
-        JOptionPane.showMessageDialog(null, "El escenario menoss visitado es "+escenarios[contador] +" con "+totalVisitantes[contador]+ " visitantes");
+        JOptionPane.showMessageDialog(null, "El escenario menos visitado es "+escenarios[contador] +" con "+totalVisitantes[contador]+ " visitantes");
     }    
      
      public void totalYPromedioDeVisitantes(){
@@ -132,5 +143,21 @@ public class EscenariosBienestar {
         }
         JOptionPane.showMessageDialog(null, "El dia menos visitado es "+dias[contador] +" con "+totalVisitantesPorDia[contador]+ " visitantes");
     }
+      
+      public String[][] llenarTabla(){
+          String [][] matriz = new String[escenarios.length][dias.length+1];
+          for (int i = 0; i < escenarios.length; i++) {
+              for (int j = 0; j < dias.length+1; j++) {
+                  if(j==0){
+                      matriz[i][j] = escenarios[i];
+                  }
+                  else{
+                      matriz[i][j] = String.valueOf(datos[i][j-1]);
+                  }
+              }
+          }
+          
+          return matriz;       
+      }
     }
 

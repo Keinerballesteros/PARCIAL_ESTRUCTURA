@@ -25,11 +25,11 @@ public class TeatroBellasArtes {
         }
     }
    
+    
     public void atender(String id,String nombre, String fecha, String pelicula, char sexo, int numeroDeBoletas){
         Nodo nuevo = new Nodo();
         for (int i = 0; i < peliculas.length; i++) {
              if(peliculas[i].equalsIgnoreCase(pelicula)){
-                 JOptionPane.showMessageDialog(null, "pelicula encontrada");
                  nuevo.setId(id);
                  nuevo.setNombre(nombre);
                  nuevo.setFecha(fecha);
@@ -50,7 +50,11 @@ public class TeatroBellasArtes {
                      temporal.setEnlace(nuevo);
                      nuevo.setEnlace(null);
                  }
+                 JOptionPane.showMessageDialog(null, "Usuario atendido exitosamente");
                  break;
+             }
+             else{
+                 JOptionPane.showMessageDialog(null, "La pelicula no esta en funcion, elija una de la cartelera, por favor");
              }
         }
     }
@@ -76,7 +80,7 @@ public class TeatroBellasArtes {
          while(temporal != null){
                if(temporal.getId().equalsIgnoreCase(documento)){
                    encontrado = true;
-                   JOptionPane.showMessageDialog(null, "El usuario "+temporal.getId() +" ha comprado: "+temporal.getNumeroDeBoletas());
+                   JOptionPane.showMessageDialog(null, "El usuario "+temporal.getId() +" ha comprado: "+temporal.getNumeroDeBoletas() + " boletas");
                    break;
                }
                temporal = temporal.getEnlace();
@@ -166,10 +170,11 @@ public class TeatroBellasArtes {
          }
          JOptionPane.showMessageDialog(null, "La pelicula donde hay mas mujeres es "+peliculas[contador] +" con "+numMujeresPorPelicula[contador] +" mujeres");
      }
+     
      public void cartelera(){
-         String mensaje = "";
+         String mensaje = "Cartelera \n";
          for (int i = 0; i < peliculas.length; i++) {
-             mensaje += peliculas[i] + numeroDeBoletasPorPelicula[i] +"\n";
+             mensaje += "Pelicula: "+ peliculas[i] +" tiene " +numeroDeBoletasPorPelicula[i] +" boletas vendidas \n";
          }
          JOptionPane.showMessageDialog(null,mensaje);
      }

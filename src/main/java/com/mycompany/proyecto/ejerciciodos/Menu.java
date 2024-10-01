@@ -48,15 +48,19 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Teatro Bellas Artes");
 
+        comprarBoletas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comprarBoletas.setText("Comprar Boletas");
+        comprarBoletas.setEnabled(false);
         comprarBoletas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comprarBoletasActionPerformed(evt);
             }
         });
 
+        insertarPeliculas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         insertarPeliculas.setText("Insertar Peliculas");
         insertarPeliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,42 +68,54 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buscar.setText("Buscar");
+        buscar.setEnabled(false);
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarActionPerformed(evt);
             }
         });
 
+        peliculaMasMujeres.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         peliculaMasMujeres.setText("Pelicula con Mas Mujeres");
+        peliculaMasMujeres.setEnabled(false);
         peliculaMasMujeres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 peliculaMasMujeresActionPerformed(evt);
             }
         });
 
+        AdultosMayores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         AdultosMayores.setText("Adultos Mayores");
+        AdultosMayores.setEnabled(false);
         AdultosMayores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AdultosMayoresActionPerformed(evt);
             }
         });
 
+        imprimir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         imprimir.setText("Imprimir");
+        imprimir.setEnabled(false);
         imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 imprimirActionPerformed(evt);
             }
         });
 
+        totalHombresYMujeres.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         totalHombresYMujeres.setText("Total Hombres y Mujeres");
+        totalHombresYMujeres.setEnabled(false);
         totalHombresYMujeres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 totalHombresYMujeresActionPerformed(evt);
             }
         });
 
+        cartelera.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cartelera.setText("Cartelera ");
+        cartelera.setEnabled(false);
         cartelera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carteleraActionPerformed(evt);
@@ -123,7 +139,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(insertarPeliculas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(comprarBoletas))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -165,7 +181,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalHombresYMujeres)
                     .addComponent(cartelera))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -173,6 +189,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void insertarPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarPeliculasActionPerformed
        teatro.insertarPeliculas();
+       comprarBoletas.setEnabled(true);
+       cartelera.setEnabled(true);
     }//GEN-LAST:event_insertarPeliculasActionPerformed
 
     private void comprarBoletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarBoletasActionPerformed
@@ -180,15 +198,28 @@ public class Menu extends javax.swing.JFrame {
        String id = JOptionPane.showInputDialog(null, "Ingrese su id: ");
        String fecha = JOptionPane.showInputDialog(null, "Ingrese su fecha de nacimiento: (formato dd-mm-aaaa)");
        String pelicula = JOptionPane.showInputDialog(null, "Ingrese el nombre de la pelicula: ");
-       String input = JOptionPane.showInputDialog(null,"Ingrese su sexo ((f) si femenino o (m) si es masculino");
-       char sexo;
-       sexo = input.charAt(0);
        int numeroDeBoletas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de boletas que va a comprar: (Ingrese un numero)"));
-       teatro.atender(id, nombre, fecha, pelicula, sexo, numeroDeBoletas);
+       boolean valor = true;
+       while(valor){
+            String input = JOptionPane.showInputDialog(null,"Ingrese su sexo ((f) si femenino o (m) si es masculino");
+            char sexo;
+            sexo = input.charAt(0);
+            if(sexo == 'F' || sexo == 'f' || sexo == 'M' || sexo == 'm'){
+                teatro.atender(id, nombre, fecha, pelicula, sexo, numeroDeBoletas);
+                valor = false;
+            }
+       }
+
+       buscar.setEnabled(true);
+       AdultosMayores.setEnabled(true);
+       peliculaMasMujeres.setEnabled(true);
+       totalHombresYMujeres.setEnabled(true);
+       imprimir.setEnabled(true);
     }//GEN-LAST:event_comprarBoletasActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        teatro.buscar(JOptionPane.showInputDialog("Ingrese el documento a buscar"));
+        teatro.buscar(JOptionPane.showInputDialog("Ingrese el documento a buscar: "));
+        
     }//GEN-LAST:event_buscarActionPerformed
 
     private void peliculaMasMujeresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peliculaMasMujeresActionPerformed
