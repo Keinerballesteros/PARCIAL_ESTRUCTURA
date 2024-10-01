@@ -17,47 +17,59 @@ public class TeatroBellasArtes {
     }
     
     public void insertarPeliculas(){
+        
         int size =  Integer.parseInt(JOptionPane.showInputDialog("Ingrese cuantas peliculas hay:"));
-        peliculas = new String[size];
-        numeroDeBoletasPorPelicula = new int[size];
+        peliculas = new String[size]; //Deadpool, Cry
+        numeroDeBoletasPorPelicula = new int[size]; //2, 5
         for (int i = 0; i < peliculas.length; i++) {
             peliculas[i] = JOptionPane.showInputDialog("Ingrese el nombre de la pelicula "+(i+1)); 
         }
+        
     }
    
     
-    public void atender(String id,String nombre, String fecha, String pelicula, char sexo, int numeroDeBoletas){
-        Nodo nuevo = new Nodo();
-        for (int i = 0; i < peliculas.length; i++) {
-             if(peliculas[i].equalsIgnoreCase(pelicula)){
-                 nuevo.setId(id);
-                 nuevo.setNombre(nombre);
-                 nuevo.setFecha(fecha);
-                 nuevo.setPelicula(pelicula);
-                 nuevo.setSexo(sexo);
-                 nuevo.setNumeroDeBoletas(numeroDeBoletas);
-                 numeroDeBoletasPorPelicula[i] += numeroDeBoletas;
-                 if(inicio == null){
-                     inicio = nuevo;
-                     nuevo.setEnlace(null);
-                 break;
-                 }
-                 else{
-                     Nodo temporal = inicio;
-                     while(temporal.getEnlace() != null){
-                         temporal = temporal.getEnlace();
-                     }
-                     temporal.setEnlace(nuevo);
-                     nuevo.setEnlace(null);
-                 }
-                 JOptionPane.showMessageDialog(null, "Usuario atendido exitosamente");
-                 break;
-             }
-             else{
-                 JOptionPane.showMessageDialog(null, "La pelicula no esta en funcion, elija una de la cartelera, por favor");
-             }
+    public void atender(String id, String nombre, String fecha, String pelicula, char sexo) {
+    Nodo nuevo = new Nodo();
+    for (int i = 0; i < peliculas.length; i++) {
+        if (peliculas[i].equalsIgnoreCase(pelicula)) {
+            nuevo.setId(id);
+            nuevo.setNombre(nombre);
+            nuevo.setFecha(fecha);
+            nuevo.setPelicula(pelicula);
+            nuevo.setSexo(sexo);
+            numeroDeBoletasPorPelicula[i]++;
+            
+            if (inicio == null) {
+                inicio = nuevo;
+                nuevo.setEnlace(null);
+                JOptionPane.showMessageDialog(null, "Usuario atendido exitosamente");
+            } else {
+                Nodo temporal = inicio;
+                
+                // Verificar si el usuario ya tiene un boleto para esta película
+                while (temporal != null) {
+                    if (temporal.getId().equalsIgnoreCase(id) && temporal.getPelicula().equalsIgnoreCase(pelicula)) {
+                        JOptionPane.showMessageDialog(null, "El usuario ya tiene boleto para esta pelicula");
+                        return; // Salir del método
+                    }
+                    // Avanzar al siguiente nodo
+                    if (temporal.getEnlace() == null) {
+                        break; 
+                    }
+                    temporal = temporal.getEnlace();
+                }
+
+                // Añadir el nuevo nodo al final
+                temporal.setEnlace(nuevo);
+                nuevo.setEnlace(null);
+                JOptionPane.showMessageDialog(null, "Usuario atendido exitosamente");
+            }
+            return; 
+               }
+          }
+             JOptionPane.showMessageDialog(null, "La pelicula no esta en funcion");
         }
-    }
+
     public void imprimir(){
         if(inicio == null){
             JOptionPane.showMessageDialog(null, "La lista esta vacia");
@@ -80,8 +92,7 @@ public class TeatroBellasArtes {
          while(temporal != null){
                if(temporal.getId().equalsIgnoreCase(documento)){
                    encontrado = true;
-                   JOptionPane.showMessageDialog(null, "El usuario "+temporal.getId() +" ha comprado: "+temporal.getNumeroDeBoletas() + " boletas");
-                   break;
+                   JOptionPane.showMessageDialog(null, "El usuario "+temporal.getId() +" ha comprado entradas para ver a "+temporal.getPelicula());
                }
                temporal = temporal.getEnlace();
               }
@@ -140,6 +151,7 @@ public class TeatroBellasArtes {
             return (int) años;
         } catch (Exception e) {
             System.err.println("Error al calcular la edad: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Ingreso incorrectamente la edad");
             return -1; // Valor negativo para indicar un error
         }
      }
@@ -168,13 +180,26 @@ public class TeatroBellasArtes {
                 pivote =numMujeresPorPelicula[i];
             }
          }
+         if(numMujeresPorPelicula[contador] == 0){
+             JOptionPane.showMessageDialog(null, "No hay mujeres en ninguna pelicula");
+         }
+         else{
          JOptionPane.showMessageDialog(null, "La pelicula donde hay mas mujeres es "+peliculas[contador] +" con "+numMujeresPorPelicula[contador] +" mujeres");
+         }
      }
      
      public void cartelera(){
          String mensaje = "Cartelera \n";
          for (int i = 0; i < peliculas.length; i++) {
              mensaje += "Pelicula: "+ peliculas[i] +" tiene " +numeroDeBoletasPorPelicula[i] +" boletas vendidas \n";
+         }
+         JOptionPane.showMessageDialog(null,mensaje);
+     }
+     
+     public void carteleraNombres(){
+         String mensaje = "Cartelera \n";
+         for (int i = 0; i < peliculas.length; i++) {
+             mensaje += "Pelicula: "+ peliculas[i] +"\n";
          }
          JOptionPane.showMessageDialog(null,mensaje);
      }

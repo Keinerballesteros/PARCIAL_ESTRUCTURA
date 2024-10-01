@@ -23,7 +23,6 @@ public class EscenariosBienestar {
         int contador = 0;
         for (int i = 0; i < escenarios.length; i++) {
             for (int j = 0; j < dias.length; j++) {
-               
                datos[i][j] = array[contador];
                contador++;
             }
@@ -102,7 +101,6 @@ public class EscenariosBienestar {
                totalVisitantes += datos[i][j];
             }
         }
-        
         JOptionPane.showMessageDialog(null, "El total de visitantes es de: "+totalVisitantes +" y con un promedio de: "+(totalVisitantes/(dias.length*escenarios.length)));
     }
     

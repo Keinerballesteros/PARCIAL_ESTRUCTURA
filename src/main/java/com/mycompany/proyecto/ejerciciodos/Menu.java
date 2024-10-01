@@ -197,15 +197,16 @@ public class Menu extends javax.swing.JFrame {
        String nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre: ");
        String id = JOptionPane.showInputDialog(null, "Ingrese su id: ");
        String fecha = JOptionPane.showInputDialog(null, "Ingrese su fecha de nacimiento: (formato dd-mm-aaaa)");
+       teatro.carteleraNombres();
        String pelicula = JOptionPane.showInputDialog(null, "Ingrese el nombre de la pelicula: ");
-       int numeroDeBoletas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de boletas que va a comprar: (Ingrese un numero)"));
+     
        boolean valor = true;
        while(valor){
             String input = JOptionPane.showInputDialog(null,"Ingrese su sexo ((f) si femenino o (m) si es masculino");
             char sexo;
             sexo = input.charAt(0);
             if(sexo == 'F' || sexo == 'f' || sexo == 'M' || sexo == 'm'){
-                teatro.atender(id, nombre, fecha, pelicula, sexo, numeroDeBoletas);
+                teatro.atender(id, nombre, fecha, pelicula, sexo);
                 valor = false;
             }
        }
