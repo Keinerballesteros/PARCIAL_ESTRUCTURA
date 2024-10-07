@@ -17,14 +17,12 @@ public class TeatroBellasArtes {
     }
     
     public void insertarPeliculas(){
-        
         int size =  Integer.parseInt(JOptionPane.showInputDialog("Ingrese cuantas peliculas hay:"));
         peliculas = new String[size]; //Deadpool, Cry
         numeroDeBoletasPorPelicula = new int[size]; //2, 5
         for (int i = 0; i < peliculas.length; i++) {
             peliculas[i] = JOptionPane.showInputDialog("Ingrese el nombre de la pelicula "+(i+1)); 
         }
-        
     }
    
     
@@ -38,14 +36,12 @@ public class TeatroBellasArtes {
             nuevo.setPelicula(pelicula);
             nuevo.setSexo(sexo);
             numeroDeBoletasPorPelicula[i]++;
-            
             if (inicio == null) {
                 inicio = nuevo;
                 nuevo.setEnlace(null);
                 JOptionPane.showMessageDialog(null, "Usuario atendido exitosamente");
             } else {
                 Nodo temporal = inicio;
-                
                 // Verificar si el usuario ya tiene un boleto para esta película
                 while (temporal != null) {
                     if (temporal.getId().equalsIgnoreCase(id) && temporal.getPelicula().equalsIgnoreCase(pelicula)) {
@@ -157,7 +153,7 @@ public class TeatroBellasArtes {
      }
      
      public void masMujeres(){
-         int numMujeresPorPelicula [] = new int [3];
+         int numMujeresPorPelicula [] = new int [peliculas.length];
          Nodo temporal = inicio;
          if(inicio == null){
             JOptionPane.showMessageDialog(null, "La lista esta vacia");

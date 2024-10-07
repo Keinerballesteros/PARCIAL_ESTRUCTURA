@@ -4,8 +4,6 @@ package com.mycompany.proyecto.ejerciciodos;
 
 public class Nodo {
 
-    
-   
 
     /**
      * @return the id
